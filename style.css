@@ -1,0 +1,443 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+        
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+        
+.scroll-container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    cursor: grab;
+  }
+        
+.scroll-container:active {
+    cursor: grabbing;
+  }
+        
+.scene {
+    position: relative;
+    height: 100vh;
+    /* width: auto; */
+    width: max-content;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+.background {
+    display: block;
+    height: 100vh;
+    width: auto;
+    /* 母容器scene的尺寸不会自动让里面的图片跟着缩放，所以这里要再加一段规定background大小的。。。 */
+  }
+
+  .TV {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .front-TV {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+    height: 100vh;
+    width: auto;
+    z-index: 10;
+    /* z-index 通常需要配合定位属性才能生效(position) */
+
+    pointer-events: none;
+    /* 对不需要交互的覆盖图层使用 */
+  }
+
+.screen {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    /* 这段代码会让它跟随 .scene 的宽度缩放。 */
+    /* position: absolute：让屏幕图脱离普通排版流，不再撑开 .scene*/
+    /* width: 100%：让屏幕图宽度跟随定位参考元素的宽度。 */
+    /* height: auto：保持图片原本的比例。 */
+    top: 0;
+    left: 0;
+    z-index: 2;
+/* ↓ Glitch效果 */
+    animation: glitch 3s infinite;
+ }
+
+
+ .tv_screen_1,
+ .tv_screen_2,
+ .tv_screen_3,
+ .tv_screen_4,
+ .tv_screen_5,
+ .tv_screen_6,
+ .tv_screen_7,
+ .tv_screen_10,
+ .tv_screen_11,
+ .tv_screen_12,
+ .tv_screen_13,
+ .tv_screen_14,
+ .tv_screen_15,
+ .tv_screen_17,
+ .tv_screen_18,
+ .tv_screen_19,
+ .tv_screen_20  {
+    position: absolute;
+    z-index: 3;
+ }
+
+.tv_screen_1 {
+    left: 14.84%;
+    top: 27.7%;
+    width: 4.1%;
+    height: auto;
+ }
+
+ .tv_screen_2 {
+    left: 21.4%;
+    top: 28%;
+    width: 5.2%;
+    height: auto;
+ }
+
+  .tv_screen_3 {
+    left: 28.1%;
+    top: 27.5%;
+    width: 4.5%;
+    height: auto;
+ }
+
+   .tv_screen_4 {
+    left: 33.5%;
+    top: 28.9%;
+    width: 4%;
+    height: auto;
+ }
+
+   .tv_screen_5 {
+    left: 14.78%;
+    top: 43.3%;
+    width: 4.65%;
+    height: auto;
+ }
+
+   .tv_screen_6 {
+    left: 20.95%;
+    top: 44.2%;
+    width: 4.9%;
+    height: auto;
+ }
+
+    .tv_screen_7 {
+    left: 27.15%;
+    top: 46.5%;
+    width: 4.3%;
+    height: auto;
+ }
+
+    .tv_screen_10 {
+    left: 20.16%;
+    top: 59.7%;
+    width: 5.49%;
+    height: auto;
+ }
+
+    .tv_screen_11 {
+    left: 27%;
+    top: 62.2%;
+    width: 4.3%;
+    height: auto;
+ }
+
+    .tv_screen_12 {
+    left: 33%;
+    top: 60.5%;
+    width: 4.4%;
+    height: auto;
+ }
+
+    .tv_screen_13 {
+    left: 45.43%;
+    top: 28.73%;
+    width: 10.9%;
+    height: auto;
+ }
+
+    .tv_screen_14 {
+    left: 70.3%;
+    top: 21.52%;
+    width: 5.45%;
+    height: auto;
+ }
+
+    .tv_screen_15 {
+    left: 81.21%;
+    top: 19%;
+    width: 5.5%;
+    height: auto;
+ }
+    .tv_screen_17 {
+    left: 63.8%;
+    top: 46.9%;
+    width: 6.8%;
+    height: auto;
+ }
+
+    .tv_screen_18 {
+    left: 72.3%;
+    top: 43.6%;
+    width: 6.15%;
+    height: auto;
+ }
+
+    .tv_screen_19 {
+    left: 80.15%;
+    top: 44.85%;
+    width: 7.46%;
+    height: auto;
+ }
+
+    .tv_screen_20 {
+    left: 88.82%;
+    top: 49.3%;
+    width: 3.4%;
+    height: auto;
+ }
+
+      .tv_screen_1 img,
+      .tv_screen_2 img,
+      .tv_screen_3 img,
+      .tv_screen_4 img,
+      .tv_screen_5 img,
+      .tv_screen_6 img,
+      .tv_screen_7 img,
+      .tv_screen_10 img,
+      .tv_screen_11 img,
+      .tv_screen_12 img,
+      .tv_screen_13 img,
+      .tv_screen_14 img,
+      .tv_screen_15 img,
+      .tv_screen_17 img,
+      .tv_screen_18 img,
+      .tv_screen_19 img,
+      .tv_screen_20 img  {
+         position: absolute;
+         width: 100%;
+         height: auto;
+         top: 0;
+         left: 0;
+
+          transition: opacity 0.1s ease-in-out;
+     }
+
+/* 平时：悬浮图藏起来 */
+.screen_hover {
+    opacity: 0;
+}
+
+/* 鼠标移到外框上：悬浮图出现，默认图消失 */
+.tv_screen_1:hover .screen_hover,
+.tv_screen_2:hover .screen_hover,
+.tv_screen_3:hover .screen_hover,
+.tv_screen_4:hover .screen_hover,
+.tv_screen_5:hover .screen_hover,
+.tv_screen_6:hover .screen_hover,
+.tv_screen_7:hover .screen_hover,
+.tv_screen_10:hover .screen_hover,
+.tv_screen_11:hover .screen_hover,
+.tv_screen_12:hover .screen_hover,
+.tv_screen_13:hover .screen_hover,
+.tv_screen_14:hover .screen_hover,
+.tv_screen_15:hover .screen_hover,
+.tv_screen_17:hover .screen_hover,
+.tv_screen_18:hover .screen_hover,
+.tv_screen_19:hover .screen_hover,
+.tv_screen_20:hover .screen_hover {
+    opacity: 1;
+}
+
+.tv_screen_1:hover .screen_normal,
+.tv_screen_2:hover .screen_normal,
+.tv_screen_3:hover .screen_normal,
+.tv_screen_4:hover .screen_normal,
+.tv_screen_5:hover .screen_normal,
+.tv_screen_6:hover .screen_normal,
+.tv_screen_7:hover .screen_normal,
+.tv_screen_10:hover .screen_normal,
+.tv_screen_11:hover .screen_normal,
+.tv_screen_12:hover .screen_normal,
+.tv_screen_13:hover .screen_normal,
+.tv_screen_14:hover .screen_normal,
+.tv_screen_15:hover .screen_normal,
+.tv_screen_17:hover .screen_normal,
+.tv_screen_18:hover .screen_normal,
+.tv_screen_19:hover .screen_normal,
+.tv_screen_20:hover .screen_normal {
+    opacity: 0;
+}
+
+/* 鼠标移到外框上：悬浮图出现，默认图消失 */
+.tv_screen_1.active .screen_hover,
+.tv_screen_2.active .screen_hover,
+.tv_screen_3.active .screen_hover,
+.tv_screen_4.active .screen_hover,
+.tv_screen_5.active .screen_hover,
+.tv_screen_6.active .screen_hover,
+.tv_screen_7.active .screen_hover,
+.tv_screen_10.active .screen_hover,
+.tv_screen_11.active .screen_hover,
+.tv_screen_12.active .screen_hover,
+.tv_screen_13.active .screen_hover,
+.tv_screen_14.active .screen_hover,
+.tv_screen_15.active .screen_hover,
+.tv_screen_17.active .screen_hover,
+.tv_screen_18.active .screen_hover,
+.tv_screen_19.active .screen_hover,
+.tv_screen_20.active .screen_hover {
+    opacity: 1;
+}
+
+.tv_screen_1.active .screen_normal,
+.tv_screen_2.active .screen_normal,
+.tv_screen_3.active .screen_normal,
+.tv_screen_4.active .screen_normal,
+.tv_screen_5.active .screen_normal,
+.tv_screen_6.active .screen_normal,
+.tv_screen_7.active .screen_normal,
+.tv_screen_10.active .screen_normal,
+.tv_screen_11.active .screen_normal,
+.tv_screen_12.active .screen_normal,
+.tv_screen_13.active .screen_normal,
+.tv_screen_14.active .screen_normal,
+.tv_screen_15.active .screen_normal,
+.tv_screen_17.active .screen_normal,
+.tv_screen_18.active .screen_normal,
+.tv_screen_19.active .screen_normal,
+.tv_screen_20.active .screen_normal {
+    opacity: 0;
+}
+
+/* .scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0px,
+        rgba(0, 0, 0, 0.3) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+        animation: scan-move 0.6s linear infinite;
+
+    /* 只在 screen_1.webp 有内容的地方显示
+    -webkit-mask-image: url(image-webp/screen_1.webp);
+    mask-image: url(image-webp/screen_1.webp);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}  */
+
+/*@keyframes scan-move {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 5px;
+    }
+} */
+
+.balloon {
+    position: absolute;
+
+    /* 气球在场景里的初始位置 */
+    left: 2504px;
+    top: 658px;
+
+    width: 171px;
+    height: auto;
+    z-index: 5;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
+    touch-action: none;
+
+    transform-origin: 50% 50%;
+    /* 设置气球某位置作为旋转中心 */
+    animation: balloon-sway 2s ease-in-out infinite;
+}
+
+.balloon:active {
+    cursor: grabbing;
+}
+
+/* 拖动时：轻轻摇摆 */
+.balloon.dragging {
+    animation: balloon-sway 0.6s ease-in-out infinite;
+}
+
+/* 扔出去时：摇摆幅度更大 */
+.balloon.flying {
+    animation: balloon-sway-big 0.45s ease-in-out infinite;
+}
+
+/* 气球摇摆 */
+@keyframes balloon-sway {
+    0% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+
+    100% {
+        transform: rotate(-3deg);
+    }
+}
+
+@keyframes balloon-sway-big {
+    0%, 100% {
+        transform: rotate(-12deg);
+    }
+
+    50% {
+        transform: rotate(12deg);
+    }
+}
+
+.Caution {
+    position: absolute;
+
+    /* 在场景里的初始位置 */
+    left: 40px;
+    top: 640px;
+
+    width: 165px;
+    height: auto;
+    z-index: 6;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
+    touch-action: none;
+}

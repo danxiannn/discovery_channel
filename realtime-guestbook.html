@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Making data persist</title>
+		<link rel="stylesheet" href="style.css"/>
+  </head>
+  <body style="padding: 12px;">
+		<div class="data-entry">
+			<form id="submissions">
+				<input type="text" id="name" placeholder="your name" required>
+				<input type="submit" value="submit">
+			</form>
+		</div>	
+
+		<script type="module">
+			import { supabase, } from './supabase-utils.js'
+
+			// change this to the name of your table
+			const tableName = 'visitors';
+
+			let db_result = await supabase
+			.from(tableName)
+			.select('*')
+
+			const updateDatabase = async (e) => {
+				e.preventDefault();
+
+				const input = document.querySelector('#name');
+				const name = input.value;
+
+				// if there's no name, we don't proceed
+				if (name.length === 0) {
+					return;
+				}
+				
+				input.value = '';
+				
+				const { error } = await supabase
+				.from(tableName)
+				.insert({
+					name: name,
+				});
+
+				if (error) console.error('error inserting data! booooo: ', error);
+			}
+
+			document.querySelector('#submissions').addEventListener('submit', updateDatabase);
+
+			const handleReceiveData = (item) => {
+				const itemId = item.id;
+				const id = 'guest_' + itemId;
+
+				if (!document.getElementById(id)) {
+					const container = document.createElement('div');
+					container.className = 'visitor';
+					container.id = id;
+						
+					const p = document.createElement('p');
+					p.textContent = item.name;
+					container.appendChild(p);
+
+					document.body.appendChild(container);
+				} else {
+					const container = document.getElementById(id);
+					container.style.left = item.x_percent + '%';
+					container.style.top = item.y_percent + '%';
+				}
+			}
+
+			const data = db_result.data;
+
+			console.log('data received: ', data);
+
+			data?.forEach((item) => {
+				handleReceiveData(item);
+			});
+
+
+			// updating without reloading the page
+
+			const channel = supabase
+			.channel('guests')
+			.on(
+				'postgres_changes',
+				{ event: '*', schema: 'public', table: tableName },
+				(payload) => {
+					console.log('update! ', payload);
+					handleReceiveData(payload.new);
+				}
+			)
+			.subscribe();
+			
+		</script>
+
+  </body>
+</html>
